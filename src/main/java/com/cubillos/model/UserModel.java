@@ -32,7 +32,21 @@ public class UserModel {
             cascade =  CascadeType.ALL,
             mappedBy = "users")
     private UserRoleModel userRole;
+	
+	// Hibernate requires a no-arg constructor
+    public UserModel() {
 
+    }
+    
+    public UserModel(String emailUser, String nameUser, String lastNameUser, String password, String enterpriseName, int state) {
+        this.emailUser = emailUser;
+        this.nameUser = nameUser;
+        this.lastNameUser = lastNameUser;
+        this.password = password;
+        this.enterpriseName = enterpriseName;
+        this.state = state;
+    }
+	
 	public int getIdUser() {
 		return idUser;
 	}

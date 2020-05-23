@@ -16,9 +16,18 @@ public class UserRoleModel {
 	@Column
 	private String role;
 	
-	@OneToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(referencedColumnName = "email_user")
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "email_user", insertable=false, updatable=false)
     private UserModel users;
+	
+	public UserRoleModel() {
+		
+	}
+	
+	public UserRoleModel(String emailUser, String role) {
+		this.emailUser = emailUser;
+		this.role = role;
+	}
 	
 	public String getEmailUser() {
 		return emailUser;
