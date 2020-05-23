@@ -31,10 +31,11 @@ public class SpringConfig extends WebSecurityConfigurerAdapter{
 	@Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
-			.antMatchers("/resources/**").permitAll()
+			.antMatchers("/assets/**").permitAll()
 			.antMatchers("/register").permitAll()
 			.antMatchers("/login*").permitAll()
 			.antMatchers("/home").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/template").hasAnyRole("USER")
 			.antMatchers("/enterprise").hasAnyRole("USER", "ADMIN")
 			.antMatchers("/enterprise/add_employee").hasAnyRole("USER", "ADMIN")
 			.and()

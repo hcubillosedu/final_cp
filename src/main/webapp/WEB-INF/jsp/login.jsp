@@ -28,14 +28,15 @@
 
 			<div class="form-group ">
 				<span></span> 
-					<input name="username" type="text" class="form-control" placeholder="Username" autofocus="true" /> 
-					<input name="password" type="password" class="form-control" placeholder="Password" /> 
-				<span></span>
+					<input name="username" type="text" class="form-control" placeholder="Username" autofocus="true" />
+					 
+					<input name="password" type="password" class="form-control" placeholder="Password" />
+				<span style="color:red">${errorMsg}</span>
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
 			</div>
 
 		</form>
-		<a href="/register">Register New User</a>
+		<a href="<c:url value="/register" />">Register New User</a>
 	</div>
 	<!-- /container -->
 	<script

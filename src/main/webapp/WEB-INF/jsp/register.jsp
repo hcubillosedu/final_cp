@@ -38,5 +38,6 @@
 			<input type="SUBMIT" value="Submit" />
 		</form:form>
 	</div>
+	<a href="<c:url value="/login" />">Log In</a>
 </body>
 </html>

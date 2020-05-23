@@ -9,21 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cubillos.model.UserModel;
 import com.cubillos.model.UserRoleModel;
 import com.cubillos.repository.UserRepository;
-//import com.cubillos.repository.UserRoleRepository;
 
 @Controller
 public class SecurityController {
 	@Autowired
 	private UserRepository userRepository;
-	
-	//@Autowired
-	//private UserRoleRepository userRoleRepository;
 	
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -40,13 +35,10 @@ public class SecurityController {
 		userObject.setState(1); 	// Se habilita el usuario automáticamente
 		// Se protege la contraseña suministrada por el usuario
         userObject.setPassword(bCryptPasswordEncoder.encode(userObject.getPassword()));
-        // Se guarda la informacion del usuario
-		//userRepository.save(userObject);
 		// Registro del rol
 		UserRoleModel userRoleObject = new UserRoleModel();
 		userRoleObject.setEmailUser(userObject.getEmailUser());
 		userRoleObject.setRole("ROLE_USER");
-		//userRoleRepository.save(userRoleObject);
 		userObject.setUserRole(userRoleObject);
 		userRepository.save(userObject);
 		
