@@ -6,42 +6,65 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>CUBILLOS ENTERPRISE - Ingreso</title>
+		<!-- MDB icon -->
+		<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+		<!-- Google Fonts Roboto -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+		<!-- Bootstrap core CSS -->
+		<link rel="stylesheet" href="<c:url value="/assets/css/bootstrap.min.css" />">
+		<!-- Material Design Bootstrap -->
+		<link rel="stylesheet" href="<c:url value="/assets/css/mdb.min.css" /> ">
+		<!-- Your custom styles (optional) -->
+		<!-- <link rel="stylesheet" href="css/style.css"> -->
+	</head>
 
-<title>Log in with your credentials</title>
+	<body class="fixed-sn cyan-skin">
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
+		<div style="height: 90vh">
+			<div class="flex-center flex-column row">
 
-<body>
-
-	<div class="container">
-
-		<form method="POST" action="/login" class="form-signin">
-			<h2 class="form-heading">Log in</h2>
-
-			<div class="form-group ">
-				<span></span> 
-					<input name="username" type="text" class="form-control" placeholder="Username" autofocus="true" />
-					 
-					<input name="password" type="password" class="form-control" placeholder="Password" />
-				<span style="color:red">${errorMsg}</span>
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+				<form method="POST" action="/login" class="border border-light col-4 p-5">
+					<p class="h4 mb-4 text-center"><i class="fas fa-key"></i> Sign in</p>
+					<input name="username" type="text" class="form-control mb-4" placeholder="Username" autofocus="true" />
+					<input name="password" type="password" class="form-control mb-4" placeholder="Password" />
+					
+					<c:if test="${errorMsg != null}">
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>${errorMsg}</strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					</c:if>
+					
+					<button class="btn btn-info btn-block my-4" type="submit">Sign In</button>
+					
+					<div class="text-center">
+       					<p>¿No tienes una cuenta aún?
+       						<a href="<c:url value="/register" />">Registrate</a>
+       					</p>
+					</div>
+				</form>
+				
 			</div>
-
-		</form>
-		<a href="<c:url value="/register" />">Register New User</a>
-	</div>
-	<!-- /container -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
+		</div>
+	
+	<!-- jQuery -->
+		<script type="text/javascript" src="<c:url value="/assets/js/jquery.min.js" />"></script>
+		<!-- Bootstrap tooltips -->
+		<script type="text/javascript" src="<c:url value="/assets/js/popper.min.js" />"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js" />"></script>
+		<!-- MDB core JavaScript -->
+		<script type="text/javascript" src="<c:url value="/assets/js/mdb.min.js" />"></script>
+		<!-- Your custom scripts (optional) -->
+		<script type="text/javascript"></script>
+	</body>
 </html>

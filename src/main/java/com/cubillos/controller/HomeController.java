@@ -7,8 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView home() {
+		return new ModelAndView("home");
+	}
+	
 	@RequestMapping(value = "/template", method = RequestMethod.GET)
-	public ModelAndView register() {
+	public ModelAndView template() {
 		return new ModelAndView("template");
 	}
 }
