@@ -1,5 +1,7 @@
 package com.cubillos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cubillos.model.UserModel;
+import com.cubillos.model.database.EmployeeModel;
 import com.cubillos.model.database.UserDatabaseModel;
+import com.cubillos.repository.EmployeeRepository;
 import com.cubillos.repository.UserDatabaseRepository;
 import com.cubillos.repository.UserRepository;
 
@@ -23,6 +27,9 @@ public class DatabaseController {
 	
 	@Autowired
 	private UserDatabaseRepository userDatabaseRepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index()
@@ -72,7 +79,7 @@ public class DatabaseController {
 	}
 	
 	@RequestMapping(value ="/delete/{idUserDatabase}", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable int idUserDatabase)
+	public ModelAndView delete(@PathVariable Integer idUserDatabase)
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/database");
@@ -97,11 +104,58 @@ public class DatabaseController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value ="/{idUserDatabase}", method = RequestMethod.GET)
-	public ModelAndView manage_database(@PathVariable int idUserDatabase)
+	@RequestMapping(value = {"/manage/{idUserDatabase}","/manage/{idUserDatabase}/{idEmployee}"}, method = RequestMethod.GET)
+	public ModelAndView manage_database(@PathVariable Integer idUserDatabase, @PathVariable(required = false) Integer idEmployee)
 	{
+		// Se obtienen los empleados de la base de datos que se esta trabajando
+		List<EmployeeModel> employees = employeeRepository.findByIdUserDatabase(idUserDatabase);
+		EmployeeModel employeeModel = new EmployeeModel();
+		if (idEmployee != null) {
+			employeeModel = employeeRepository.findById(idEmployee).get();
+		} 
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/database/manage");
+		modelAndView.addObject("employee_form", employeeModel);
+		modelAndView.addObject("employees", employees);
+		modelAndView.addObject("idUserDatabase", idUserDatabase);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value ="/manage/{idUserDatabase}", method = RequestMethod.POST)
+	public ModelAndView save_employee(@ModelAttribute("employee") EmployeeModel employeeObject, @PathVariable Integer idUserDatabase)
+	{
+		employeeObject.setState(1);
+		employeeObject.setIdUserDatabase(idUserDatabase);
+		employeeRepository.save(employeeObject);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/database/manage/"+idUserDatabase);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value ="/employee/delete/{idUserDatabase}/{idEmployee}", method = RequestMethod.GET)
+	public ModelAndView delete_employee(@PathVariable Integer idUserDatabase, @PathVariable Integer idEmployee)
+	{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/database/manage/"+idUserDatabase);
+		
+		EmployeeModel employeeModel = employeeRepository.findById(idEmployee).get();
+		employeeModel.setState(0);
+		employeeRepository.save(employeeModel);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value ="/employee/undelete/{idUserDatabase}/{idEmployee}", method = RequestMethod.GET)
+	public ModelAndView undelete_employee(@PathVariable Integer idUserDatabase, @PathVariable Integer idEmployee)
+	{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/database/manage/"+idUserDatabase);
+		
+		EmployeeModel employeeModel = employeeRepository.findById(idEmployee).get();
+		employeeModel.setState(1);
+		employeeRepository.save(employeeModel);
 		
 		return modelAndView;
 	}

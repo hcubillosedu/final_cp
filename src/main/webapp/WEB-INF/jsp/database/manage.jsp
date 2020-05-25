@@ -40,9 +40,6 @@
 			    	<a class="nav-link" href="<c:url value="/database" /> "><i class="fas fa-database"></i> Bases de datos</a>
 			  	</li>
 			  	<li class="nav-item">
-			    	<a class="nav-link" href="<c:url value="/admin" /> "><i class="fas fa-users-cog"></i> Administración de Usuarios</a>
-			  	</li>
-			  	<li class="nav-item">
 			    	<a class="nav-link" href="<c:url value="/logout" /> "><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 			  	</li>
 			</ul>
@@ -52,66 +49,151 @@
 	    <main>
       		<div class="container-fluid">		
 	          	<!-- content-->
-	          	<div class="wow row justify-content-center" data-wow-delay="0.2s">
-	          		<div class="col-md-8 col-sm-12">
-			            <form:form action="/database/manage/save" method="post" class="border border-light p-5" modelAttribute="employee_form">
-						    <p class="h4 mb-4 text-center"><i class="fas fa-database"></i> Crear Empleado</p>
-						
-							<form:hidden path="databaseName" class="form-control mb-4" />
-						    
-						    <label for="databaseName">Nombre base de datos</label>
-						    <form:input path="databaseName" class="form-control mb-4" />
-						    <form:errors path="databaseName"></form:errors>
-						    
-						    <label for="description">Observación</label>
-						    <form:textarea path="description" type="text" class="form-control mb-4" />
-						    <form:errors path="description"></form:errors>
-						
-						    <button class="btn btn-info btn-block my-4" type="submit">Crear</button>
-						
-						</form:form>
-					</div>
-		          	<div class="col-md-8 col-sm-12">
-		          		<div class="border border-light p-5">
-		          			<p class="h4 mb-4 text-center"><i class="fas fa-database"></i> Tus Bases de datos</p>
-		          			
-		          			<table class="table table-striped">
+	          	<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+				  <!-- Accordion card -->
+				  <div class="card">
+				
+				    <!-- Card header -->
+				    <div class="card-header" role="tab" id="headingOne1">
+				      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+				        <h5 class="mb-0">
+				          <i class="fas fa-database"></i> Tus Empleados <i class="fas fa-angle-down rotate-icon"></i>
+				        </h5>
+				      </a>
+				    </div>
+				
+				    <!-- Card body -->
+				    <div id="collapseOne1" class="collapse <c:if test="${employee_form.idEmployee == 0}">show</c:if>" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+						<div class="card-body">
+			        		<table class="table table-striped">
 		          				<thead class="bg-info" style="color:white;">
-		          					<th>Fecha</th>
-		          					<th>Nombre base de datos</th>
-		          					<th>Observación</th>
+		          					<th>Nombre completo</th>
+		          					<th>Edad</th>
+		          					<th>F.Nacimiento</th>
+		          					<th>Cargo</th>
+		          					<th>#Teléfono</th>
+		          					<th>Dirección</th>
+		          					<th>Contacto</th>
+		          					<th># Tel.Contacto</th>
 		          					<th>Estado</th>
 		          					<th></th>
-		          				</thead>
+	 		          				</thead>
 		          				<tbody>
-		          					<c:forEach items="${databases_user}" var="database">
+		          					<c:forEach items="${employees}" var="employee">
 		          					<tr>
-    									<td>${database.createdAt}</td>
-    									<td>${database.databaseName}</td>
-    									<td>${database.description}</td>
-    									<td>
-    										<c:if test="${database.state == 1}"><span class="badge badge-success">Activo</span></c:if>
-    										<c:if test="${database.state == 0}"><span class="badge badge-danger">Inactivo</span></c:if>
-    									</td>
-    									<td>
-    										<div class="btn-group-vertical" role="group" aria-label="Acciones">
-    											<c:if test="${database.state == 1}">
-    												<a class="btn btn-sm btn-primary" title="Editar" href="<c:url value="/database/edit/${database.idUserDatabase}" />"><i class="far fa-edit"></i></a>
-    												<a class="btn btn-sm btn-danger" title="Inactivar" href="<c:url value="/database/delete/${database.idUserDatabase}" />"><i class="fas fa-trash"></i></a>
-    											</c:if>
-    											<c:if test="${database.state != 1}">
-    												<a class="btn btn-sm btn-info" title="Activar" href="<c:url value="/database/undelete/${database.idUserDatabase}" />"><i class="fas fa-check"></i></a>
-    											</c:if>
-    										</div>
-    									</td>
-    								</tr>
-    								</c:forEach>
+	   									<td>${employee.fullName}</td>
+	   									<td>${employee.age}</td>
+	   									<td>${employee.birthday}</td>
+	   									<td>${employee.position}</td>
+	   									<td>${employee.telephone}</td>
+	   									<td>${employee.address}</td>
+	   									<td>${employee.fullNameContact}</td>
+	   									<td>${employee.telephoneContact}</td>
+	   									<td>
+	   										<c:if test="${employee.state == 1}"><span class="badge badge-success">Activo</span></c:if>
+	   										<c:if test="${employee.state == 0}"><span class="badge badge-danger">Inactivo</span></c:if>
+	   									</td>
+	   									<td>
+	   										<div class="btn-group-vertical" role="group" aria-label="Acciones">
+	   											<c:if test="${employee.state == 1}">
+	   												<a class="btn btn-sm btn-primary" title="Editar" href="<c:url value="/database/manage/${idUserDatabase}/${employee.idEmployee}" />"><i class="far fa-edit"></i></a>
+	   												<a class="btn btn-sm btn-danger" title="Inactivar" href="<c:url value="/database/employee/delete/${idUserDatabase}/${employee.idEmployee}" />"><i class="fas fa-trash"></i></a>
+	   											</c:if>
+	   											<c:if test="${employee.state != 1}">
+	   												<a class="btn btn-sm btn-info" title="Activar" href="<c:url value="/database/employee/undelete/${idUserDatabase}/${employee.idEmployee}" />"><i class="fas fa-check"></i></a>
+	   											</c:if>
+	   										</div>
+	   									</td>
+	   								</tr>
+	   								</c:forEach>
 		          				</tbody>
 		          			</table>
-		          		</div>
-		          	</div>
-		          <!--/.content-->
+				      	</div>
+					</div>
+				
+				  </div>
+				  <!-- Accordion card -->
+				
+				  <!-- Accordion card -->
+				  <div class="card">
+				
+				    <!-- Card header -->
+				    <div class="card-header" role="tab" id="headingTwo2">
+				      <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+				        <h5 class="mb-0">
+				          <i class="fas fa-database"></i>
+				          	<c:if test="${employee_form.idEmployee == 0}">Crear</c:if> 
+				          	<c:if test="${employee_form.idEmployee != 0}">Actualizar</c:if>
+				          	Empleado 
+				          	<i class="fas fa-angle-down rotate-icon"></i>
+				        </h5>
+				      </a>
+				    </div>
+				
+				    <!-- Card body -->
+				    <div id="collapseTwo2" class="collapse <c:if test="${employee_form.idEmployee != 0}">show</c:if>" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
+						<div class="card-body">
+							<form:form action="/database/manage/${idUserDatabase}" method="post" class="border border-light p-5 row" modelAttribute="employee_form">
+								<form:hidden path="idEmployee" />
+								<div class="col-6 col-md-6 col-sm-12">						    
+								    <label for="fullName">Nombre completo*</label>
+								    <form:input path="fullName" class="form-control mb-4" />
+								    <form:errors path="fullName"></form:errors>
+								</div>
+							    <div class="col-6 col-md-6 col-sm-12">
+								    <label for="age">Edad*</label>
+								    <input type="number" name="age" id="age" min="1" class="form-control mb-4" value='<c:out value="${employee_form.age}"></c:out>' />
+								    <form:errors path="age"></form:errors>
+							    </div>
+							    <div class="col-6 col-md-6 col-sm-12">
+								    <label for="birthday">Fecha Nacimiento*</label>
+								    <input type="date" name="birthday" id="birthday" class="form-control mb-4" value='<c:out value="${employee_form.birthday}"></c:out>' />
+								    <form:errors path="birthday"></form:errors>
+							    </div>
+							    <div class="col-6 col-md-6 col-sm-12">
+								    <label for="position">Cargo*</label>
+								    <form:input path="position" class="form-control mb-4" />
+								    <form:errors path="position"></form:errors>
+								</div>
+							    <div class="col-6 col-md-6 col-sm-12">
+								    <label for="telephone"># Telefono*</label>
+								    <form:input path="telephone" class="form-control mb-4" />
+								    <form:errors path="telephone"></form:errors>
+								</div>
+							    <div class="col-6 col-md-6 col-sm-12">
+									<label for="telephone2"># Telefono 2</label>
+								    <form:input path="telephone2" class="form-control mb-4" />
+								    <form:errors path="telephone2"></form:errors>
+							    </div>
+							    <div class="col-6 col-md-6 col-sm-12">
+								    <label for="address">Dirección*</label>
+								    <form:input path="address" class="form-control mb-4" />
+								    <form:errors path="address"></form:errors>
+							    </div>
+							    <div class="col-6 col-md-6 col-sm-12">
+								    <label for="fullNameContact">Nombre de contacto*</label>
+								    <form:input path="fullNameContact" class="form-control mb-4" />
+								    <form:errors path="fullNameContact"></form:errors>
+								</div>
+							    <div class="col-6 col-md-6 col-sm-12">
+								    <label for="telephoneContact"># Telefono contacto**</label>
+								    <form:input path="telephoneContact" class="form-control mb-4" />
+								    <form:errors path="telephoneContact"></form:errors>
+							    </div>
+							    <div class="col-6 col-md-6 col-sm-12">
+							    	<button class="btn btn-info btn-block my-4" type="submit">
+							    		<c:if test="${employee_form.idEmployee != 0}">Actualizar</c:if>
+							    		<c:if test="${employee_form.idEmployee == 0}">Crear</c:if>
+							    	</button>
+							    </div>
+							</form:form>
+						</div>
+				    </div>
+				  </div>
+				  <!-- Accordion card -->
 				</div>
+				<!--/.content-->
 	      	</div>
 	    </main>
 	    <!--/Main layout-->

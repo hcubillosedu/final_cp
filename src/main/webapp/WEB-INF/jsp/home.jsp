@@ -35,9 +35,11 @@
 			  	<li class="nav-item">
 			    	<a class="nav-link" href="<c:url value="/database" /> "><i class="fas fa-database"></i> Bases de datos</a>
 			  	</li>
+			  	<c:if test="${role_user="ROLE_ADMIN"}">
 			  	<li class="nav-item">
 			    	<a class="nav-link" href="<c:url value="/admin" /> "><i class="fas fa-users-cog"></i> Administración de Usuarios</a>
 			  	</li>
+			  	</c:if>
 			  	<li class="nav-item">
 			    	<a class="nav-link" href="<c:url value="/logout" /> "><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 			  	</li>

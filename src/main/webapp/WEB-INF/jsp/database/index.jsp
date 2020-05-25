@@ -40,9 +40,6 @@
 			    	<a class="nav-link" href="<c:url value="/database" /> "><i class="fas fa-database"></i> Bases de datos</a>
 			  	</li>
 			  	<li class="nav-item">
-			    	<a class="nav-link" href="<c:url value="/admin" /> "><i class="fas fa-users-cog"></i> Administración de Usuarios</a>
-			  	</li>
-			  	<li class="nav-item">
 			    	<a class="nav-link" href="<c:url value="/logout" /> "><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 			  	</li>
 			</ul>
@@ -78,7 +75,7 @@
     									<td>
     										<div class="btn-group-vertical" role="group" aria-label="Acciones">
     											<c:if test="${database.state == 1}">
-    												<a class="btn btn-sm btn-primary" title="Editar" href="<c:url value="/database/edit/${database.idUserDatabase}" />"><i class="far fa-edit"></i></a>
+    												<a class="btn btn-sm btn-primary" title="Administrar" href="<c:url value="/database/manage/${database.idUserDatabase}" />"><i class="far fa-edit"></i></a>
     												<a class="btn btn-sm btn-danger" title="Inactivar" href="<c:url value="/database/delete/${database.idUserDatabase}" />"><i class="fas fa-trash"></i></a>
     											</c:if>
     											<c:if test="${database.state != 1}">
@@ -99,11 +96,11 @@
 						    <label for="enterprise_name_txt">Empresa</label>
 						    <input value="<c:out value="${enterprise_name_txt}" ></c:out> " class="form-control mb-4" readonly />
 						    
-						    <label for="databaseName">Nombre base de datos</label>
+						    <label for="databaseName">Nombre base de datos*</label>
 						    <form:input path="databaseName" class="form-control mb-4" />
 						    <form:errors path="databaseName"></form:errors>
 						    
-						    <label for="description">Observación</label>
+						    <label for="description">Observación*</label>
 						    <form:textarea path="description" type="text" class="form-control mb-4" />
 						    <form:errors path="description"></form:errors>
 						
