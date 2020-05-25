@@ -13,8 +13,7 @@ CREATE TABLE `users`(
   `state` TINYINT DEFAULT 1,
   PRIMARY KEY (`id_user`),
   KEY (`email_user`),
-  UNIQUE INDEX `idx_email_user` (`email_user`),
-  UNIQUE INDEX `idx_enterprise_name` (`enterprise_name`)
+  UNIQUE INDEX `idx_email_user` (`email_user`)
 );
 
 DROP TABLE IF EXISTS `user_role`;
@@ -27,20 +26,21 @@ CREATE TABLE `user_role` (
   CONSTRAINT `fk_ur_user` FOREIGN KEY (`email_user`) REFERENCES `users` (`email_user`) ON DELETE NO ACTION ON UPDATE NO ACTION	
 );
 
+DROP TABLE IF EXISTS `user_database`;
+CREATE TABLE `user_database` (
+  `id_user_database` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_user` INT(11) NOT NULL,
+  `database_name` VARCHAR(100) NOT NULL,
+  `description` LONGTEXT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `state` TINYINT DEFAULT 1,
+  PRIMARY KEY (`id_user_database`),
+  CONSTRAINT `fk_ud_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION	
+);
+
 -- INSERTS
-INSERT INTO `users`
-            (`email_user`,
-             `name_user`,
-             `last_name_user`,
-             `password`,
-             `enterprise_name`,
-             `state`)
-VALUES ('user',
-        'Sebastian',
-        'Cubillos',
-        '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a',
-        'empresa',
-        1);
+INSERT INTO `users`(`email_user`,`name_user`,`last_name_user`,`password`,`enterprise_name`,`state`)
+VALUES ('user','Sebastian','Cubillos','$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a','empresa',1);
 
 
 INSERT INTO `user_role`

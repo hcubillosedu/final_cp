@@ -24,7 +24,7 @@
 	<body class="fixed-sn cyan-skin">
 		<div style="height: 100vh">
 			<div class="flex-center flex-column">
-				<form:form action="/register" method="post" modelAttribute="user" class="border border-light p-5">
+				<form:form action="<c:url value="/register" />" method="post" modelAttribute="user" class="border border-light p-5">
 					<p class="h4 mb-4 text-center"><i class="fas fa-user-plus"></i> Register New User</p>
 					
 					<label for="nameUser">Nombres*</label>
@@ -64,6 +64,7 @@
 					</p>
         
 				</form:form>
-
+			</div>
+		</div>
 </body>
 </html>
