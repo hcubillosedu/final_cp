@@ -35,11 +35,9 @@
 			  	<li class="nav-item">
 			    	<a class="nav-link" href="<c:url value="/database" /> "><i class="fas fa-database"></i> Bases de datos</a>
 			  	</li>
-			  	<c:if test="${role_user="ROLE_ADMIN"}">
 			  	<li class="nav-item">
 			    	<a class="nav-link" href="<c:url value="/admin" /> "><i class="fas fa-users-cog"></i> Administración de Usuarios</a>
 			  	</li>
-			  	</c:if>
 			  	<li class="nav-item">
 			    	<a class="nav-link" href="<c:url value="/logout" /> "><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 			  	</li>
@@ -71,7 +69,7 @@
 						
 			            <a class="btn btn-primary btn-lg col-5 float-left" href="<c:url value="/account" /> "><i class="fas fa-user-cog"></i> Administrar Cuenta</a>
 			            <a class="btn btn-secondary btn-lg col-5 float-left" href="<c:url value="/database" /> "><i class="fas fa-database"></i> Bases de datos</a>
-			            <a class="btn btn-default btn-lg col-5 float-left" href="<c:url value="/admin"/>" ><i class="fas fa-users-cog"></i> Administración de Usuarios</a>
+			            <a class="btn btn-default btn-lg col-5 float-left" href="<c:url value="/admin_user"/>" ><i class="fas fa-users-cog"></i> Administración de Usuarios</a>
 			            <a class="btn btn-info btn-lg col-5 float-left" href="<c:url value="/about_us"/>"><i class="fas fa-info-circle"></i> Acerca de</a>
 				  	</div>
 		          </div>

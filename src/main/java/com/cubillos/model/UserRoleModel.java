@@ -29,6 +29,14 @@ public class UserRoleModel {
 		this.role = role;
 	}
 	
+	public int getIdUserRole() {
+		return idUserRole;
+	}
+	
+	public void setIdUserRole(int idUserRole) {
+		this.idUserRole = idUserRole;
+	}
+	
 	public String getEmailUser() {
 		return emailUser;
 	}

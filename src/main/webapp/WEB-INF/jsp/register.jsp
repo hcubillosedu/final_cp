@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@
 	<body class="fixed-sn cyan-skin">
 		<div style="height: 100vh">
 			<div class="flex-center flex-column">
-				<form:form action="<c:url value="/register" />" method="post" modelAttribute="user" class="border border-light p-5">
+				<form:form action="/register" method="post" modelAttribute="user" class="border border-light p-5">
 					<p class="h4 mb-4 text-center"><i class="fas fa-user-plus"></i> Register New User</p>
 					
 					<label for="nameUser">Nombres*</label>

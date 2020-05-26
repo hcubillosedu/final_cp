@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>CUBILLOS ENTERPRISE - Bases de datos</title>
+		<title>CUBILLOS ENTERPRISE - Usuarios</title>
 		<!-- MDB icon -->
 		<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
 		<!-- Font Awesome -->
@@ -59,50 +59,42 @@
 				    <div class="card-header" role="tab" id="headingOne1">
 				      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
 				        <h5 class="mb-0">
-				          <i class="fas fa-database"></i> Tus Empleados <i class="fas fa-angle-down rotate-icon"></i>
+				          <i class="fas fa-user"></i> Usuarios registrados <i class="fas fa-angle-down rotate-icon"></i>
 				        </h5>
 				      </a>
 				    </div>
 				
 				    <!-- Card body -->
-				    <div id="collapseOne1" class="collapse <c:if test="${employee_form.idEmployee == 0}">show</c:if>" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+				    <div id="collapseOne1" class="collapse <c:if test="${user_form.idUser == 0}">show</c:if>" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
 						<div class="card-body">
-			        		<table id="employeeTale" class="table table-striped table-bordered" cellspacing="0" width="100%">
+			        		<table id="usersTale" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		          				<thead class="bg-info" style="color:white;">
-		          					<th>Nombre completo</th>
-		          					<th>Edad</th>
-		          					<th>F.Nacimiento</th>
-		          					<th>Cargo</th>
-		          					<th>#Teléfono</th>
-		          					<th>Dirección</th>
-		          					<th>Contacto</th>
-		          					<th># Tel.Contacto</th>
+		          					<th>Email</th>
+		          					<th>Nombres</th>
+		          					<th>Apellidos</th>
+		          					<th>Empresa</th>
 		          					<th>Estado</th>
 		          					<th></th>
 	 		          				</thead>
 		          				<tbody>
-		          					<c:forEach items="${employees}" var="employee">
+		          					<c:forEach items="${users}" var="user">
 		          					<tr>
-	   									<td>${employee.fullName}</td>
-	   									<td>${employee.age}</td>
-	   									<td>${employee.birthday}</td>
-	   									<td>${employee.position}</td>
-	   									<td>${employee.telephone}</td>
-	   									<td>${employee.address}</td>
-	   									<td>${employee.fullNameContact}</td>
-	   									<td>${employee.telephoneContact}</td>
+	   									<td>${user.emailUser}</td>
+	   									<td>${user.nameUser}</td>
+	   									<td>${user.lastNameUser}</td>
+	   									<td>${user.enterpriseName}</td>
 	   									<td>
-	   										<c:if test="${employee.state == 1}"><span class="badge badge-success">Activo</span></c:if>
-	   										<c:if test="${employee.state == 0}"><span class="badge badge-danger">Inactivo</span></c:if>
+	   										<c:if test="${user.state == 1}"><span class="badge badge-success">Activo</span></c:if>
+	   										<c:if test="${user.state == 0}"><span class="badge badge-danger">Inactivo</span></c:if>
 	   									</td>
 	   									<td>
 	   										<div class="btn-group-vertical" role="group" aria-label="Acciones">
-	   											<c:if test="${employee.state == 1}">
-	   												<a class="btn btn-sm btn-primary" title="Editar" href="<c:url value="/database/manage/${idUserDatabase}/${employee.idEmployee}" />"><i class="far fa-edit"></i></a>
-	   												<a class="btn btn-sm btn-danger" title="Inactivar" href="<c:url value="/database/employee/delete/${idUserDatabase}/${employee.idEmployee}" />"><i class="fas fa-trash"></i></a>
+	   											<c:if test="${user.state == 1}">
+	   												<a class="btn btn-sm btn-primary" title="Editar" href="<c:url value="/admin_user/edit/${user.idUser}" />"><i class="far fa-edit"></i></a>
+	   												<a class="btn btn-sm btn-danger" title="Inactivar" href="<c:url value="/admin_user/delete/${user.idUser}" />"><i class="fas fa-trash"></i></a>
 	   											</c:if>
-	   											<c:if test="${employee.state != 1}">
-	   												<a class="btn btn-sm btn-info" title="Activar" href="<c:url value="/database/employee/undelete/${idUserDatabase}/${employee.idEmployee}" />"><i class="fas fa-check"></i></a>
+	   											<c:if test="${user.state != 1}">
+	   												<a class="btn btn-sm btn-info" title="Activar" href="<c:url value="/admin_user/undelete/${user.idUser}" />"><i class="fas fa-check"></i></a>
 	   											</c:if>
 	   										</div>
 	   									</td>
@@ -112,7 +104,6 @@
 		          			</table>
 				      	</div>
 					</div>
-				
 				  </div>
 				  <!-- Accordion card -->
 				
@@ -124,68 +115,54 @@
 				      <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
 				        <h5 class="mb-0">
 				          <i class="fas fa-database"></i>
-				          	<c:if test="${employee_form.idEmployee == 0}">Crear</c:if> 
-				          	<c:if test="${employee_form.idEmployee != 0}">Actualizar</c:if>
-				          	Empleado 
+				          	<c:if test="${user_form.idUser== 0}">Crear</c:if> 
+				          	<c:if test="${user_form.idUser != 0}">Actualizar</c:if>
+				          	Usuario 
 				          	<i class="fas fa-angle-down rotate-icon"></i>
 				        </h5>
 				      </a>
 				    </div>
 				
 				    <!-- Card body -->
-				    <div id="collapseTwo2" class="collapse <c:if test="${employee_form.idEmployee != 0}">show</c:if>" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
+				    <div id="collapseTwo2" class="collapse <c:if test="${user_form.idUser != 0}">show</c:if>" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
 						<div class="card-body">
-							<form:form action="/database/manage/${idUserDatabase}" method="post" class="border border-light p-5 row" modelAttribute="employee_form">
-								<form:hidden path="idEmployee" />
+							<form:form action="/admin_user" method="post" class="border border-light p-5 row" modelAttribute="user_form">
+								<form:hidden path="idUser" />
+								<form:hidden path="userRole.emailUser" />
+								
 								<div class="col-6 col-md-6 col-sm-12">						    
-								    <label for="fullName">Nombre completo*</label>
-								    <form:input path="fullName" class="form-control mb-4" />
-								    <form:errors path="fullName"></form:errors>
+								    <label for="nameUser">Nombres*</label>
+								    <form:input path="nameUser" class="form-control mb-4" />
+								    <form:errors path="nameUser"></form:errors>
 								</div>
 							    <div class="col-6 col-md-6 col-sm-12">
-								    <label for="age">Edad*</label>
-								    <input type="number" name="age" id="age" min="1" class="form-control mb-4" value='<c:out value="${employee_form.age}"></c:out>' />
-								    <form:errors path="age"></form:errors>
+								    <label for="lastNameUser">Apellidos*</label>
+								    <form:input path="lastNameUser" class="form-control mb-4" />
+								    <form:errors path="lastNameUser"></form:errors>
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
-								    <label for="birthday">Fecha Nacimiento*</label>
-								    <input type="date" name="birthday" id="birthday" class="form-control mb-4" value='<c:out value="${employee_form.birthday}"></c:out>' />
-								    <form:errors path="birthday"></form:errors>
+								    <label for="emailUser">Email*</label>
+								    <input type="email" name="emailUser" id="emailUser" class="form-control mb-4" value="<c:out value="${user_form.emailUser}"></c:out>" />
+								    <form:errors path="emailUser"></form:errors>
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
-								    <label for="position">Cargo*</label>
-								    <form:input path="position" class="form-control mb-4" />
-								    <form:errors path="position"></form:errors>
+								    <label for="enterpriseName">Empresa*</label>
+								    <form:input path="enterpriseName" class="form-control mb-4" />
+								    <form:errors path="enterpriseName"></form:errors>
 								</div>
-							    <div class="col-6 col-md-6 col-sm-12">
-								    <label for="telephone"># Telefono*</label>
-								    <form:input path="telephone" class="form-control mb-4" />
-								    <form:errors path="telephone"></form:errors>
+								<div class="col-6 col-md-6 col-sm-12">
+								    <label for="userRole.role">Rol*</label>
+								    <form:select path="userRole.role" class="form-control mb-4" >
+								    	<form:option value="">Seleccione</form:option>
+								    	<form:option value="ROLE_USER" >USER</form:option>
+								    	<form:option value="ROLE_ADMIN" >ADMIN</form:option>
+								    </form:select>
+								    <form:errors path="userRole.role"></form:errors>
 								</div>
-							    <div class="col-6 col-md-6 col-sm-12">
-									<label for="telephone2"># Telefono 2</label>
-								    <form:input path="telephone2" class="form-control mb-4" />
-								    <form:errors path="telephone2"></form:errors>
-							    </div>
-							    <div class="col-6 col-md-6 col-sm-12">
-								    <label for="address">Dirección*</label>
-								    <form:input path="address" class="form-control mb-4" />
-								    <form:errors path="address"></form:errors>
-							    </div>
-							    <div class="col-6 col-md-6 col-sm-12">
-								    <label for="fullNameContact">Nombre de contacto*</label>
-								    <form:input path="fullNameContact" class="form-control mb-4" />
-								    <form:errors path="fullNameContact"></form:errors>
-								</div>
-							    <div class="col-6 col-md-6 col-sm-12">
-								    <label for="telephoneContact"># Telefono contacto**</label>
-								    <form:input path="telephoneContact" class="form-control mb-4" />
-								    <form:errors path="telephoneContact"></form:errors>
-							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
 							    	<button class="btn btn-info btn-block my-4" type="submit">
-							    		<c:if test="${employee_form.idEmployee != 0}">Actualizar</c:if>
-							    		<c:if test="${employee_form.idEmployee == 0}">Crear</c:if>
+							    		<c:if test="${user_form.idUser != 0}">Actualizar</c:if>
+							    		<c:if test="${user_form.idUser == 0}">Crear</c:if>
 							    	</button>
 							    </div>
 							</form:form>
@@ -213,7 +190,7 @@
 		<!-- Your custom scripts (optional) -->
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$('#employeeTale').DataTable();
+				$('#usersTale').DataTable();
 				$('.dataTables_length').addClass('bs-select');
 			});
 		</script>

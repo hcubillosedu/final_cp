@@ -59,14 +59,13 @@ CREATE TABLE `employee` (
 
 -- INSERTS
 INSERT INTO `users`(`email_user`,`name_user`,`last_name_user`,`password`,`enterprise_name`,`state`)
-VALUES ('user','Sebastian','Cubillos','$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a','empresa',1);
+VALUES ('admin','Administrador','Sistema','$2a$10$Vc6SykQvSzDDDEUxnz8sYeKt.gIn3/LxzSIJ6ZDqXzse821T13ImC','Admin',1);
+-- INSERT INTO `users`(`email_user`,`name_user`,`last_name_user`,`password`,`enterprise_name`,`state`)
+-- VALUES ('user','Sebastian','Cubillos','$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a','empresa',1);
 
 
-INSERT INTO `user_role`
-            (`email_user`,
-             `role`)
-VALUES ('user',
-        'ROLE_USER');
+INSERT INTO `user_role` (`email_user`, `role`) VALUES ('user', 'ROLE_USER');
+INSERT INTO `user_role` (`email_user`, `role`) VALUES ('admin', 'ROLE_ADMIN');
         
 -- FINISH
 SET FOREIGN_KEY_CHECKS=1;

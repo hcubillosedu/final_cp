@@ -8,4 +8,6 @@ import com.cubillos.model.UserRoleModel;
 @Repository
 public interface UserRoleRepository extends CrudRepository<UserRoleModel, Integer> {
 
+	void deleteByEmailUser(String emailUser);
+
 }
