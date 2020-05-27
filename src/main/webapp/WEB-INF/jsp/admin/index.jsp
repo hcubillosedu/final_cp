@@ -132,27 +132,27 @@
 								
 								<div class="col-6 col-md-6 col-sm-12">						    
 								    <label for="nameUser">Nombres*</label>
-								    <form:input path="nameUser" class="form-control mb-4" />
+								    <form:input path="nameUser" class="form-control mb-4" required="true" />
 								    <form:errors path="nameUser"></form:errors>
 								</div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="lastNameUser">Apellidos*</label>
-								    <form:input path="lastNameUser" class="form-control mb-4" />
+								    <form:input path="lastNameUser" class="form-control mb-4" required="true" />
 								    <form:errors path="lastNameUser"></form:errors>
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="emailUser">Email*</label>
-								    <input type="email" name="emailUser" id="emailUser" class="form-control mb-4" value="<c:out value="${user_form.emailUser}"></c:out>" />
+								    <input type="email" name="emailUser" id="emailUser" class="form-control mb-4" required="true" value="<c:out value="${user_form.emailUser}"></c:out>" <c:if test="${user_form.idUser != 0}">readonly</c:if> />
 								    <form:errors path="emailUser"></form:errors>
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="enterpriseName">Empresa*</label>
-								    <form:input path="enterpriseName" class="form-control mb-4" />
+								    <form:input path="enterpriseName" class="form-control mb-4" required="true" />
 								    <form:errors path="enterpriseName"></form:errors>
 								</div>
 								<div class="col-6 col-md-6 col-sm-12">
 								    <label for="userRole.role">Rol*</label>
-								    <form:select path="userRole.role" class="form-control mb-4" >
+								    <form:select path="userRole.role" class="form-control mb-4" required="true" >
 								    	<form:option value="">Seleccione</form:option>
 								    	<form:option value="ROLE_USER" >USER</form:option>
 								    	<form:option value="ROLE_ADMIN" >ADMIN</form:option>

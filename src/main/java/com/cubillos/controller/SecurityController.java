@@ -3,6 +3,8 @@ package com.cubillos.controller;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,18 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cubillos.model.ChangePassModel;
 import com.cubillos.model.UserModel;
 import com.cubillos.model.UserRoleModel;
 import com.cubillos.repository.UserRepository;
-import com.cubillos.repository.UserRoleRepository;
 
 @Controller
 public class SecurityController {
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Autowired
-	private UserRoleRepository userRoleRepository;
 	
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -79,7 +78,6 @@ public class SecurityController {
 		UserModel userModel = new UserModel();
 		if (idUser != null) {
 			userModel = userRepository.findById(idUser).get();
-			System.out.println(userModel.getUserRole());
 		} 
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -137,7 +135,7 @@ public class SecurityController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value ="/admin_user/undelete/{idUser}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin_user/undelete/{idUser}", method = RequestMethod.GET)
 	public ModelAndView undelete_employee(@PathVariable Integer idUser)
 	{
 		ModelAndView modelAndView = new ModelAndView();
@@ -146,6 +144,65 @@ public class SecurityController {
 		UserModel userModel = userRepository.findById(idUser).get();
 		userModel.setState(1);
 		userRepository.save(userModel);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/account", method = RequestMethod.GET)
+	public ModelAndView account(@PathVariable(required = false) String error)
+	{
+		// Se obtiene la informacion del usuario logueado
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = "";
+		if (principal instanceof UserDetails) {
+		  username = ((UserDetails)principal).getUsername();
+		} else {
+		  username = principal.toString();
+		}
+		
+		UserModel userModel = userRepository.findByEmailUser(username);
+		ChangePassModel changePass = new ChangePassModel(); 
+		
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/profile");
+		modelAndView.addObject("user_form", userModel);
+		modelAndView.addObject("password_form", changePass);
+
+		if (error != null) {
+			modelAndView.addObject("errorMsg", "La antigua contraseña no es correcta");
+		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/account", method = RequestMethod.POST)
+	public ModelAndView account_changepass(@ModelAttribute("password") ChangePassModel changePassObject)
+	{
+		// Se obtiene la informacion del usuario logueado
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = "";
+		if (principal instanceof UserDetails) {
+		  username = ((UserDetails)principal).getUsername();
+		} else {
+		  username = principal.toString();
+		}
+
+		ModelAndView modelAndView = new ModelAndView();
+		UserModel userModel = userRepository.findByEmailUser(username);
+		
+		if (bCryptPasswordEncoder.matches(changePassObject.getPassword(), userModel.getPassword())) {
+			// La contraseña anterior es la misma nueva contraseña
+			userModel.setPassword(bCryptPasswordEncoder.encode(changePassObject.getNewPassword()));
+			
+			userRepository.save(userModel);
+			
+			modelAndView.addObject("success", "pass");
+		} else {
+			// Error de contraseña
+			modelAndView.addObject("error", "pass");
+		}
+		
+		modelAndView.setViewName("redirect:/account");
 		
 		return modelAndView;
 	}

@@ -139,27 +139,27 @@
 								<form:hidden path="idEmployee" />
 								<div class="col-6 col-md-6 col-sm-12">						    
 								    <label for="fullName">Nombre completo*</label>
-								    <form:input path="fullName" class="form-control mb-4" />
+								    <form:input path="fullName" class="form-control mb-4" required="true" />
 								    <form:errors path="fullName"></form:errors>
 								</div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="age">Edad*</label>
-								    <input type="number" name="age" id="age" min="1" class="form-control mb-4" value='<c:out value="${employee_form.age}"></c:out>' />
+								    <input type="number" name="age" id="age" min="1" class="form-control mb-4" required="true" value='<c:out value="${employee_form.age}"></c:out>' />
 								    <form:errors path="age"></form:errors>
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="birthday">Fecha Nacimiento*</label>
-								    <input type="date" name="birthday" id="birthday" class="form-control mb-4" value='<c:out value="${employee_form.birthday}"></c:out>' />
+								    <input type="date" name="birthday" id="birthday" class="form-control mb-4" required="true" value='<c:out value="${employee_form.birthday}"></c:out>' />
 								    <form:errors path="birthday"></form:errors>
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="position">Cargo*</label>
-								    <form:input path="position" class="form-control mb-4" />
+								    <form:input path="position" class="form-control mb-4" required="true" />
 								    <form:errors path="position"></form:errors>
 								</div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="telephone"># Telefono*</label>
-								    <form:input path="telephone" class="form-control mb-4" />
+								    <form:input path="telephone" class="form-control mb-4" required="true" />
 								    <form:errors path="telephone"></form:errors>
 								</div>
 							    <div class="col-6 col-md-6 col-sm-12">
@@ -169,17 +169,17 @@
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="address">Dirección*</label>
-								    <form:input path="address" class="form-control mb-4" />
+								    <form:input path="address" class="form-control mb-4" required="true" />
 								    <form:errors path="address"></form:errors>
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="fullNameContact">Nombre de contacto*</label>
-								    <form:input path="fullNameContact" class="form-control mb-4" />
+								    <form:input path="fullNameContact" class="form-control mb-4" required="true" />
 								    <form:errors path="fullNameContact"></form:errors>
 								</div>
 							    <div class="col-6 col-md-6 col-sm-12">
 								    <label for="telephoneContact"># Telefono contacto**</label>
-								    <form:input path="telephoneContact" class="form-control mb-4" />
+								    <form:input path="telephoneContact" class="form-control mb-4" required="true" />
 								    <form:errors path="telephoneContact"></form:errors>
 							    </div>
 							    <div class="col-6 col-md-6 col-sm-12">

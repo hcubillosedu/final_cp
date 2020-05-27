@@ -97,11 +97,11 @@
 						    <input value="<c:out value="${enterprise_name_txt}" ></c:out> " class="form-control mb-4" readonly />
 						    
 						    <label for="databaseName">Nombre base de datos*</label>
-						    <form:input path="databaseName" class="form-control mb-4" />
+						    <form:input path="databaseName" class="form-control mb-4" required="true" />
 						    <form:errors path="databaseName"></form:errors>
 						    
 						    <label for="description">Observación*</label>
-						    <form:textarea path="description" type="text" class="form-control mb-4" />
+						    <form:textarea path="description" type="text" class="form-control mb-4" required="true" />
 						    <form:errors path="description"></form:errors>
 						
 						    <button class="btn btn-info btn-block my-4" type="submit">Crear</button>

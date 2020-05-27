@@ -32,8 +32,8 @@
 
 				<form method="POST" action="/login" class="border border-light col-4 p-5">
 					<p class="h4 mb-4 text-center"><i class="fas fa-key"></i> Sign in</p>
-					<input name="username" type="text" class="form-control mb-4" placeholder="Username" autofocus="true" />
-					<input name="password" type="password" class="form-control mb-4" placeholder="Password" />
+					<input name="username" type="text" class="form-control mb-4" placeholder="Username" autofocus="true" required="true" />
+					<input name="password" type="password" class="form-control mb-4" placeholder="Password" required="true" />
 					
 					<c:if test="${errorMsg != null}">
 					<div class="alert alert-warning alert-dismissible fade show" role="alert">

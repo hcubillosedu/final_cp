@@ -28,23 +28,23 @@
 					<p class="h4 mb-4 text-center"><i class="fas fa-user-plus"></i> Register New User</p>
 					
 					<label for="nameUser">Nombres*</label>
-					<form:input path="nameUser" class="form-control mb-4" placeholder="Nombres" />
+					<form:input path="nameUser" class="form-control mb-4" placeholder="Nombres" required="true" />
 					<form:errors path="nameUser"></form:errors>
 					
 					<label for="lastNameUser">Apellidos*</label>
-					<form:input path="lastNameUser" class="form-control mb-4" placeholder="Apellidos" />
+					<form:input path="lastNameUser" class="form-control mb-4" placeholder="Apellidos" required="true" />
 					<form:errors path="lastNameUser"></form:errors>
 					
 					<label for="emailUser">Email*</label>
-					<form:input path="emailUser" class="form-control mb-4" placeholder="@"/>
+					<form:input path="emailUser" class="form-control mb-4" placeholder="@" required="true" />
 					<form:errors path="emailUser"></form:errors>
 					
 					<label for="enterpriseName">Empresa*</label>
-					<form:input path="enterpriseName" class="form-control mb-4" placeholder="Empresa"/>
+					<form:input path="enterpriseName" class="form-control mb-4" placeholder="Empresa" required="true" />
 					<form:errors path="enterpriseName"></form:errors>
 					
 					<label for="password">Contraseña*</label>
-					<form:password path="password" class="form-control mb-4" placeholder="*****"/>
+					<form:password path="password" class="form-control mb-4" placeholder="*****" required="true" />
 					<form:errors path="password"></form:errors>
 					
 					<button class="btn btn-info my-4 btn-block" type="submit">Sign up</button>
