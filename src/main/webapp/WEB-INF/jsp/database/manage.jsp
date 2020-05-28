@@ -178,7 +178,7 @@
 								    <form:errors path="fullNameContact"></form:errors>
 								</div>
 							    <div class="col-6 col-md-6 col-sm-12">
-								    <label for="telephoneContact"># Telefono contacto**</label>
+								    <label for="telephoneContact"># Telefono contacto*</label>
 								    <form:input path="telephoneContact" class="form-control mb-4" required="true" />
 								    <form:errors path="telephoneContact"></form:errors>
 							    </div>

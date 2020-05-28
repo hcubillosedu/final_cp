@@ -65,12 +65,45 @@
 		            <h5 class="blue-text"><strong>By Cubillos bros.</strong></h5>
 		
 		            <p class="card-text">Registra la información más importante de los empleados de tu empresa</p>
+		            <hr>
 					<div class="row justify-content-center">
-						
-			            <a class="btn btn-primary btn-lg col-5 float-left" href="<c:url value="/account" /> "><i class="fas fa-user-cog"></i> Administrar Cuenta</a>
-			            <a class="btn btn-secondary btn-lg col-5 float-left" href="<c:url value="/database" /> "><i class="fas fa-database"></i> Bases de datos</a>
-			            <a class="btn btn-default btn-lg col-5 float-left" href="<c:url value="/admin_user"/>" ><i class="fas fa-users-cog"></i> Administración de Usuarios</a>
-			            <a class="btn btn-info btn-lg col-5 float-left" href="<c:url value="/about"/>"><i class="fas fa-info-circle"></i> Acerca de</a>
+						<div class="col-6 text-justify">
+							<h2 class="text-center">Objetivos</h2>
+							<h3>General</h3>
+							<ul>
+								<li>
+									Desarrollar un aplicativo eficaz y de fácil manejo, desde el cual las empresas asociadas puedan 
+									realizar el registro y/o actualización de la información básica de contacto de sus empleados, 
+									de este modo tener un mayor control de veracidad de la información y un respaldo de datos para una 
+									posible eventualidad.
+								</li>
+							</ul>
+							<h3>Específicos</h3>
+							<ul>
+								<li>
+									Permitir a las empresas tener una base de datos actualizada de sus empleados con 
+									información personal necesaria para cualquier eventualidad, por ejemplo los actuales 
+									tiempos de crisis sanitaria a causa de la pandemia.
+								</li>
+								<li>
+									Diseñar una aplicación móvil que sea útil, entendible y de gran ayuda para las empresas asociadas.
+								</li>
+								<li>
+									Incorporar a empresas tipo PYME que aún no estén relacionadas con el mundo de las tecnologías web, 
+									y aplicaciones con información en servidores y la nube.
+								</li>
+								<li>
+									Consolidar las competencias desarrolladas, llevando a la práctica los conocimientos adquiridos durante 
+									el semestre en la asignatura.
+								</li>
+							</ul>
+						</div>
+				  	</div>
+				  	<hr>
+				  	<div class="row justify-content-center">
+				  		<div class="col-6" style="font-size:12px">
+				  			&copy; 2020 Cubillos bros.
+				  		</div>
 				  	</div>
 		          </div>
 		          <!--/.Card content-->

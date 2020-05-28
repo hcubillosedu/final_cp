@@ -41,4 +41,9 @@ public class HomeController {
 	public ModelAndView template() {
 		return new ModelAndView("template");
 	}
+	
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public ModelAndView about() {
+		return new ModelAndView("about");
+	}
 }
